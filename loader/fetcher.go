@@ -39,7 +39,7 @@ func (l *Loader) fetchTasks() []interface{} {
 			}
 		}
 		if !processing {
-			ids[i] = tk.ID
+			ids[i] = tk.ID.String()
 		}
 
 	}
