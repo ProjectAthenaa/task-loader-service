@@ -16,7 +16,7 @@ func (l *Loader) fetchTasks() []interface{} {
 			task.StartTimeGTE(
 				time.Now(),
 			),
-			task.StartTimeLTE(time.Now().Add(time.Minute*30)),
+			task.StartTimeLTE(time.Now().Add(time.Second)),
 		).
 		WithProduct().
 		WithProfileGroup().
@@ -33,7 +33,7 @@ func (l *Loader) fetchTasks() []interface{} {
 	for i, tk := range tasks {
 		var processing bool
 		for _, processingTask := range processingTasks {
-			if processingTask == tk.ID.String() {
+			if processingTask == tk.ID.String(){
 				processing = true
 				break
 			}
