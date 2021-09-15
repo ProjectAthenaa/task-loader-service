@@ -16,7 +16,7 @@ func (l *Loader) fetchTasks() []interface{} {
 			task.StartTimeGTE(
 				time.Now(),
 			),
-			task.StartTimeLTE(time.Now().Add(time.Second)),
+			task.StartTimeLTE(time.Now().Add(time.Second * 15)),
 		).
 		WithProduct().
 		WithProfileGroup().
