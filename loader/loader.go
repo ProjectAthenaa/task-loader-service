@@ -48,7 +48,7 @@ func (l *Loader) Start() {
 }
 
 func (l *Loader) loader() {
-	for range time.Tick(time.Second) {
+	for range time.Tick(time.Millisecond * 50) {
 		tasks := l.fetchTasks()
 		rdb.SAdd(l.ctx, "scheduler:scheduled", tasks...)
 		l.loadedTasks.Add(convertToStringSlice(tasks)...)
