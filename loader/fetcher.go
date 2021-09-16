@@ -44,6 +44,8 @@ func (l *Loader) fetchTasks() []interface{} {
 
 	}
 
+	rdb.SAdd(l.ctx, "scheduler:processing", ids...)
+
 	return ids
 }
 
