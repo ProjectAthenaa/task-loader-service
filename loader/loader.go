@@ -48,9 +48,9 @@ func (l *Loader) Start() {
 }
 
 func (l *Loader) loader() {
-	for range time.Tick(time.Second) {
+	for  {
 		tasks := l.fetchTasks()
-		rdb.SAdd(l.ctx, "scheduler:scheduled", tasks...)
+		rdb.SAdd(l.ctx, "scheduler:new-tasks", tasks...)
 		l.loadedTasks.Add(convertToStringSlice(tasks)...)
 	}
 }
