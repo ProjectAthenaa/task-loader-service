@@ -16,7 +16,7 @@ func (l *Loader) fetchTasks() []interface{} {
 			task.StartTimeGTE(
 				time.Now(),
 			),
-			task.StartTimeLTE(time.Now().Add(time.Second * 5)),
+			task.StartTimeLTE(time.Now().Add(time.Second*5)),
 		).
 		All(l.ctx)
 	if err != nil {
@@ -26,13 +26,11 @@ func (l *Loader) fetchTasks() []interface{} {
 
 	ids := make([]interface{}, len(tasks))
 	processingTasks := rdb.SMembers(l.ctx, "scheduler:processing").Val()
-	if len(processingTasks) > 1{
-		fmt.Println(processingTasks)
-	}
+
 	for i, tk := range tasks {
 		var processing bool
 		for _, processingTask := range processingTasks {
-			if processingTask == tk.ID.String(){
+			if processingTask == tk.ID.String() {
 				processing = true
 				break
 			}
@@ -43,9 +41,8 @@ func (l *Loader) fetchTasks() []interface{} {
 
 	}
 
-
 	rdb.SAdd(l.ctx, "scheduler:processing", ids...)
-
+	fmt.Println(ids)
 	return ids
 }
 
